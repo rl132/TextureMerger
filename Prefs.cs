@@ -1,5 +1,6 @@
 using System;
 using System.Drawing.Imaging;
+using RLToolkit;
 
 namespace TextureMerger
 {
@@ -23,6 +24,7 @@ namespace TextureMerger
 		}
 		public ImageFormat getImageFormat()
 		{
+			this.Log ().Debug ("Feching the Image Format Preference");
 			switch (format)
 			{
 				case Prefs.prefFormat.Bmp:

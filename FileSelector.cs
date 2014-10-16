@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using Gtk;
+using RLToolkit;
 
 namespace TextureMerger
 {
@@ -9,6 +10,7 @@ namespace TextureMerger
 	{
 		public FileSelector ()
 		{
+			this.Log ().Debug ("Creating a new FileSelector");
 			this.Build ();
 			previewImage.SetSizeRequest(64,64);
 			previewImage.SetFromStock (Gtk.Stock.No, Gtk.IconSize.Button);
@@ -16,11 +18,13 @@ namespace TextureMerger
 
 		public void setText(string t)
 		{
+			this.Log ().Debug ("Setting FileSelector text to: " + t);
 			textField.Text = t;
 		}
 
 		public void clear()
 		{
+			this.Log ().Debug ("Clearing the FileSelector content");
 			fileBrowser.SetCurrentFolder(AppDomain.CurrentDomain.BaseDirectory);
 			fileBrowser.UnselectAll ();
 			previewImage.SetFromStock (Gtk.Stock.No, Gtk.IconSize.Button);
@@ -28,6 +32,7 @@ namespace TextureMerger
 
 		public void setImage (string path)
 		{
+			this.Log ().Debug ("Setting the FileSelector image to " + path);
 			previewImage.SetSizeRequest(64,64);
 			try
 			{
@@ -45,6 +50,7 @@ namespace TextureMerger
 
 		protected void OnFileBrowserSelectionChanged (object sender, EventArgs e)
 		{
+			this.Log ().Debug ("FileSelector selection changed");
 			if (fileBrowser.Filename != null) {
 				setImage (fileBrowser.Filename);
 			}
@@ -52,6 +58,7 @@ namespace TextureMerger
 
 		public string getFilename()
 		{
+			this.Log ().Debug ("Fetching the FileSelector filename");
 			return fileBrowser.Filename;
 		}
 	}
