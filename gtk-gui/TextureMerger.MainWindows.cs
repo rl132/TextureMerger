@@ -13,10 +13,7 @@ namespace TextureMerger
 		private global::Gtk.MenuBar menubar1;
 		private global::Gtk.Label title;
 		private global::Gtk.HSeparator hseparator3;
-		private global::TextureMerger.FileSelector selector1;
-		private global::TextureMerger.FileSelector selector2;
-		private global::TextureMerger.FileSelector selector3;
-		private global::TextureMerger.FileSelector selector4;
+		private global::TextureMerger.ImageSelector dynamicSelector;
 		private global::Gtk.HSeparator hseparator2;
 		private global::Gtk.HBox hbox6;
 		private global::Gtk.Label labelOutput;
@@ -50,8 +47,10 @@ namespace TextureMerger
 			this.Title = global::Mono.Unix.Catalog.GetString ("Texture Merger");
 			this.WindowPosition = ((global::Gtk.WindowPosition)(4));
 			this.BorderWidth = ((uint)(3));
-			this.DefaultWidth = 500;
-			this.DefaultHeight = 400;
+			this.Resizable = false;
+			this.AllowGrow = false;
+			this.DefaultWidth = 600;
+			this.DefaultHeight = 210;
 			// Container child TextureMerger.MainWindows.Gtk.Container+ContainerChild
 			this.vbox1 = new global::Gtk.VBox ();
 			this.vbox1.Name = "vbox1";
@@ -84,49 +83,21 @@ namespace TextureMerger
 			w4.Expand = false;
 			w4.Fill = false;
 			// Container child vbox1.Gtk.Box+BoxChild
-			this.selector1 = new global::TextureMerger.FileSelector ();
-			this.selector1.Events = ((global::Gdk.EventMask)(256));
-			this.selector1.Name = "selector1";
-			this.vbox1.Add (this.selector1);
-			global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.selector1]));
+			this.dynamicSelector = new global::TextureMerger.ImageSelector ();
+			this.dynamicSelector.Events = ((global::Gdk.EventMask)(256));
+			this.dynamicSelector.Name = "dynamicSelector";
+			this.vbox1.Add (this.dynamicSelector);
+			global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.dynamicSelector]));
 			w5.Position = 3;
-			w5.Expand = false;
 			w5.Fill = false;
-			// Container child vbox1.Gtk.Box+BoxChild
-			this.selector2 = new global::TextureMerger.FileSelector ();
-			this.selector2.Events = ((global::Gdk.EventMask)(256));
-			this.selector2.Name = "selector2";
-			this.vbox1.Add (this.selector2);
-			global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.selector2]));
-			w6.Position = 4;
-			w6.Expand = false;
-			w6.Fill = false;
-			// Container child vbox1.Gtk.Box+BoxChild
-			this.selector3 = new global::TextureMerger.FileSelector ();
-			this.selector3.Events = ((global::Gdk.EventMask)(256));
-			this.selector3.Name = "selector3";
-			this.vbox1.Add (this.selector3);
-			global::Gtk.Box.BoxChild w7 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.selector3]));
-			w7.Position = 5;
-			w7.Expand = false;
-			w7.Fill = false;
-			// Container child vbox1.Gtk.Box+BoxChild
-			this.selector4 = new global::TextureMerger.FileSelector ();
-			this.selector4.Events = ((global::Gdk.EventMask)(256));
-			this.selector4.Name = "selector4";
-			this.vbox1.Add (this.selector4);
-			global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.selector4]));
-			w8.Position = 6;
-			w8.Expand = false;
-			w8.Fill = false;
 			// Container child vbox1.Gtk.Box+BoxChild
 			this.hseparator2 = new global::Gtk.HSeparator ();
 			this.hseparator2.Name = "hseparator2";
 			this.vbox1.Add (this.hseparator2);
-			global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.hseparator2]));
-			w9.Position = 7;
-			w9.Expand = false;
-			w9.Fill = false;
+			global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.hseparator2]));
+			w6.Position = 4;
+			w6.Expand = false;
+			w6.Fill = false;
 			// Container child vbox1.Gtk.Box+BoxChild
 			this.hbox6 = new global::Gtk.HBox ();
 			this.hbox6.Name = "hbox6";
@@ -136,20 +107,20 @@ namespace TextureMerger
 			this.labelOutput.Name = "labelOutput";
 			this.labelOutput.LabelProp = global::Mono.Unix.Catalog.GetString ("Output: ");
 			this.hbox6.Add (this.labelOutput);
-			global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(this.hbox6 [this.labelOutput]));
-			w10.Position = 0;
-			w10.Expand = false;
-			w10.Fill = false;
-			w10.Padding = ((uint)(5));
+			global::Gtk.Box.BoxChild w7 = ((global::Gtk.Box.BoxChild)(this.hbox6 [this.labelOutput]));
+			w7.Position = 0;
+			w7.Expand = false;
+			w7.Fill = false;
+			w7.Padding = ((uint)(5));
 			// Container child hbox6.Gtk.Box+BoxChild
 			this.lblPath = new global::Gtk.Label ();
 			this.lblPath.Name = "lblPath";
 			this.lblPath.LabelProp = global::Mono.Unix.Catalog.GetString ("~/TextureMerger/");
 			this.hbox6.Add (this.lblPath);
-			global::Gtk.Box.BoxChild w11 = ((global::Gtk.Box.BoxChild)(this.hbox6 [this.lblPath]));
-			w11.Position = 1;
-			w11.Expand = false;
-			w11.Fill = false;
+			global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.hbox6 [this.lblPath]));
+			w8.Position = 1;
+			w8.Expand = false;
+			w8.Fill = false;
 			// Container child hbox6.Gtk.Box+BoxChild
 			this.txtFilename = new global::Gtk.Entry ();
 			this.txtFilename.CanFocus = true;
@@ -158,17 +129,17 @@ namespace TextureMerger
 			this.txtFilename.IsEditable = true;
 			this.txtFilename.InvisibleChar = '•';
 			this.hbox6.Add (this.txtFilename);
-			global::Gtk.Box.BoxChild w12 = ((global::Gtk.Box.BoxChild)(this.hbox6 [this.txtFilename]));
-			w12.Position = 2;
+			global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(this.hbox6 [this.txtFilename]));
+			w9.Position = 2;
 			// Container child hbox6.Gtk.Box+BoxChild
 			this.lblExtension = new global::Gtk.Label ();
 			this.lblExtension.Name = "lblExtension";
 			this.lblExtension.LabelProp = global::Mono.Unix.Catalog.GetString (".png");
 			this.hbox6.Add (this.lblExtension);
-			global::Gtk.Box.BoxChild w13 = ((global::Gtk.Box.BoxChild)(this.hbox6 [this.lblExtension]));
-			w13.Position = 3;
-			w13.Expand = false;
-			w13.Fill = false;
+			global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(this.hbox6 [this.lblExtension]));
+			w10.Position = 3;
+			w10.Expand = false;
+			w10.Fill = false;
 			// Container child hbox6.Gtk.Box+BoxChild
 			this.BtnBrowse = new global::Gtk.Button ();
 			this.BtnBrowse.CanFocus = true;
@@ -176,10 +147,10 @@ namespace TextureMerger
 			this.BtnBrowse.UseUnderline = true;
 			this.BtnBrowse.Label = global::Mono.Unix.Catalog.GetString ("...");
 			this.hbox6.Add (this.BtnBrowse);
-			global::Gtk.Box.BoxChild w14 = ((global::Gtk.Box.BoxChild)(this.hbox6 [this.BtnBrowse]));
-			w14.Position = 4;
-			w14.Expand = false;
-			w14.Fill = false;
+			global::Gtk.Box.BoxChild w11 = ((global::Gtk.Box.BoxChild)(this.hbox6 [this.BtnBrowse]));
+			w11.Position = 4;
+			w11.Expand = false;
+			w11.Fill = false;
 			// Container child hbox6.Gtk.Box+BoxChild
 			this.btnGo = new global::Gtk.Button ();
 			this.btnGo.CanFocus = true;
@@ -187,16 +158,16 @@ namespace TextureMerger
 			this.btnGo.UseUnderline = true;
 			this.btnGo.Label = global::Mono.Unix.Catalog.GetString ("Merge");
 			this.hbox6.Add (this.btnGo);
-			global::Gtk.Box.BoxChild w15 = ((global::Gtk.Box.BoxChild)(this.hbox6 [this.btnGo]));
-			w15.Position = 5;
-			w15.Expand = false;
-			w15.Fill = false;
-			w15.Padding = ((uint)(5));
+			global::Gtk.Box.BoxChild w12 = ((global::Gtk.Box.BoxChild)(this.hbox6 [this.btnGo]));
+			w12.Position = 5;
+			w12.Expand = false;
+			w12.Fill = false;
+			w12.Padding = ((uint)(5));
 			this.vbox1.Add (this.hbox6);
-			global::Gtk.Box.BoxChild w16 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.hbox6]));
-			w16.Position = 8;
-			w16.Expand = false;
-			w16.Fill = false;
+			global::Gtk.Box.BoxChild w13 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.hbox6]));
+			w13.Position = 5;
+			w13.Expand = false;
+			w13.Fill = false;
 			this.Add (this.vbox1);
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();

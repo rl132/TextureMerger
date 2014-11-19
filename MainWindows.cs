@@ -6,7 +6,9 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Reflection;
 using GLib;
+
 using RLToolkit;
+using RLToolkit.Basic;
 
 namespace TextureMerger
 {
@@ -39,11 +41,6 @@ namespace TextureMerger
 			// set the title/version info
 			title.Text = "Texture Merger " + Assembly.GetExecutingAssembly().GetName().Version;
 
-			// set the selector's text
-			selector1.setText ("Image 1: ");
-			selector2.setText ("Image 2: ");
-			selector3.setText ("Image 3: ");
-			selector4.setText ("Image 4: ");
 
 			// set the path to the current folder
 			currentPath = AppDomain.CurrentDomain.BaseDirectory;
@@ -65,11 +62,19 @@ namespace TextureMerger
 				// update the preferences
 				currentPrefs = preferenceDg.getPref ();
 
+				// save the new prefs
+				currentPrefs.savePref ();
+
 				// update the UI
 				updateFromPref ();
 			}
 
 			return false;
+		}
+
+		private void updateSelectors()
+		{
+			// TODO: code me
 		}
 
 		private bool updateFromPref()
@@ -101,6 +106,9 @@ namespace TextureMerger
 				}
 			}
 
+			// update selectors amount
+			updateSelectors ();
+
 			return false;
 		}
 
@@ -108,16 +116,13 @@ namespace TextureMerger
 		{
 			this.Log ().Debug ("Clearing the content");
 
-			// clear the selectors
-			selector1.clear ();
-			selector2.clear ();
-			selector3.clear ();
-			selector4.clear ();
-
 			// reset the output
 			currentPath = AppDomain.CurrentDomain.BaseDirectory;
 			lblPath.Text = currentPath;
 			txtFilename.Text = "Output";
+
+			// selector reset
+			dynamicSelector.Clear ();
 
 			return false;
 		}
@@ -141,40 +146,6 @@ namespace TextureMerger
 			fcd.Destroy ();
 		}
 
-		// todo: refactor if we can
-		private System.Drawing.Image resizeImage(System.Drawing.Image imgToResize, Size size)
-		{
-			this.Log ().Debug (string.Format("Resizing an image"));
-
-			int sourceWidth = imgToResize.Width;
-			int sourceHeight = imgToResize.Height;
-
-			float nPercent = 0;
-			float nPercentW = 0;
-			float nPercentH = 0;
-
-			nPercentW = ((float)size.Width / (float)sourceWidth);
-			nPercentH = ((float)size.Height / (float)sourceHeight);
-
-			if (nPercentH < nPercentW)
-				nPercent = nPercentH;
-			else
-				nPercent = nPercentW;
-
-			int destWidth = (int)(sourceWidth * nPercent);
-			int destHeight = (int)(sourceHeight * nPercent);
-
-			Bitmap b = new Bitmap(destWidth, destHeight);
-			Graphics g = Graphics.FromImage((System.Drawing.Image)b);
-			g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-
-			g.DrawImage(imgToResize, 0, 0, destWidth, destHeight);
-			g.Dispose();
-
-			return (System.Drawing.Image)b;
-		}
-
-		// todo: refactor if we can
 		private bool processImages()
 		{
 			this.Log ().Debug ("Processing the final image");
@@ -190,63 +161,17 @@ namespace TextureMerger
 				return false;
 			}
 
-			// missing a file, return
-			if ((selector1.getFilename () == null) ||
-				(selector2.getFilename () == null) ||
-				(selector3.getFilename () == null) ||
-				(selector4.getFilename () == null)) {
-
-				this.Log ().Warn ("One of the selector is empty. Abort!");
-				result = new MessageDialog (this, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, "Missing content. Need to have 4 images for this to work.");
-				if (result.Run () == (int)ResponseType.Ok) {
-					result.Destroy ();
-				}
-				return false;
-			}
+			this.Log ().Info ("Fetching the bitmaps");
+			Bitmap[][] inputArray = dynamicSelector.GetImages();
 
 			// initialize
 			this.Log ().Info ("Generation of the target bitmap");
+			TextureHandler output = new TextureHandler (currentPrefs.width, currentPrefs.height);
+			output.Combine (inputArray, currentPrefs.keepProportion);
 			string finalImage = System.IO.Path.Combine(currentPath, txtFilename.Text + lblExtension.Text);
-			Bitmap imgOutput = new Bitmap(1024, 1024);
-			Graphics g = Graphics.FromImage(imgOutput);
-			g.Clear(SystemColors.AppWorkspace);
-			System.Drawing.Image img;
+			output.Save (finalImage);
 
-			// first one
-			this.Log ().Info ("preparation and draw of the first image");
-			img = System.Drawing.Image.FromFile(selector1.getFilename());
-			img = resizeImage(img, new Size(512,512));
-			g.DrawImage(img, new Point(0, 0));
-			img.Dispose ();
-
-			// second one
-			this.Log ().Info ("preparation and draw of the second image");
-			img = System.Drawing.Image.FromFile(selector2.getFilename());
-			img = resizeImage(img, new Size(512,512));
-			g.DrawImage(img, new Point(512, 0));
-			img.Dispose ();
-
-			// third one
-			this.Log ().Info ("preparation and draw of the third image");
-			img = System.Drawing.Image.FromFile(selector3.getFilename());
-			img = resizeImage(img, new Size(512,512));
-			g.DrawImage(img, new Point(0, 512));
-			img.Dispose ();
-
-			// fourth one
-			this.Log ().Info ("preparation and draw of the fourth image");
-			img = System.Drawing.Image.FromFile(selector4.getFilename());
-			img = resizeImage(img, new Size(512,512));
-			g.DrawImage(img, new Point(512, 512));
-			img.Dispose ();
-
-			// finish up
-			this.Log ().Info ("Wrapping up the final bitmap");
-			g.Dispose();
-			System.Drawing.Imaging.ImageFormat format;
-			format = currentPrefs.getImageFormat ();
-			imgOutput.Save(finalImage, format);
-			imgOutput.Dispose();
+			output.Dispose ();
 
 			result = new MessageDialog (this, DialogFlags.Modal, MessageType.Info, ButtonsType.Ok, "Output successful");
 			if (result.Run () == (int)ResponseType.Ok) {
