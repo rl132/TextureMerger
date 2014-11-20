@@ -65,8 +65,8 @@ namespace TextureMerger
 		protected void OnButtonOkClicked (object sender, EventArgs e)
 		{
 			this.Log ().Debug ("Dialog Accepted");
-			// set the pref info
 
+			// set the pref info
 			Prefs prefsToTest = new Prefs ();
 			prefsToTest.format = (Prefs.prefFormat)comboFormat.Active;
 			int output;
@@ -102,4 +102,3 @@ namespace TextureMerger
 		}
 	}
 }
-

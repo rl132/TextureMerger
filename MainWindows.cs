@@ -41,7 +41,6 @@ namespace TextureMerger
 			// set the title/version info
 			title.Text = "Texture Merger " + Assembly.GetExecutingAssembly().GetName().Version;
 
-
 			// set the path to the current folder
 			currentPath = AppDomain.CurrentDomain.BaseDirectory;
 			lblPath.Text = currentPath;
@@ -74,10 +73,10 @@ namespace TextureMerger
 
 		private void updateSelectors()
 		{
-			// TODO: code me
+			// TODO: update the selector (and it items) for size changes.
 		}
 
-		private bool updateFromPref()
+		private void updateFromPref()
 		{
 			this.Log ().Debug ("Updating preferences");
 
@@ -108,8 +107,6 @@ namespace TextureMerger
 
 			// update selectors amount
 			updateSelectors ();
-
-			return false;
 		}
 
 		private bool clearInfo()
@@ -220,4 +217,3 @@ namespace TextureMerger
 		}
 	}
 }
-

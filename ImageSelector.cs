@@ -34,7 +34,6 @@ namespace TextureMerger
 
 			arrayRow = new ImageSelectorRow[1];
 			ImageSelectorRow newRow = new ImageSelectorRow (imageSize);
-
 			arrayRow [0] = newRow;
 
 			RefreshRow ();

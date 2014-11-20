@@ -24,7 +24,6 @@ namespace TextureMerger
 			prefFile = Path.Combine (AppDomain.CurrentDomain.BaseDirectory, "pref.xml");
 			mgr = new CfgManager (prefFile, typeof(XmlConfigSystem));
 			mgr.ReadConfig ();
-			// todo: initialze and maybe load config
 
 			string input;
 			int output;
@@ -74,6 +73,7 @@ namespace TextureMerger
 		{
 			this.Log ().Info ("Trying to save the preferences");
 			int output;
+
 			Int32.TryParse (format.ToString (), out output);
 			mgr.SetValue ("format", output.ToString());
 			mgr.SetValue ("width", width.ToString());
@@ -108,4 +108,3 @@ namespace TextureMerger
 		}
 	}
 }
-
