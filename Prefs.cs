@@ -1,6 +1,5 @@
 using System;
-using System.IO;
-using System.Drawing.Imaging;
+using System.Text;
 
 using RLToolkit;
 using RLToolkit.Basic;
@@ -9,58 +8,11 @@ namespace TextureMerger
 {
 	public class Prefs
 	{
+		public string prefPrefix { get; set; }
 		public prefFormat format { get; set; }
 		public int width { get; set; }
 		public int height { get; set; }
 		public bool keepProportion { get; set; }
-
-		private CfgManager mgr;
-		private string prefFile;
-
-		public Prefs()
-		{
-			this.Log ().Debug ("Constructor for a preference set");
-
-			prefFile = Path.Combine (AppDomain.CurrentDomain.BaseDirectory, "pref.xml");
-			mgr = new CfgManager (prefFile, typeof(XmlConfigSystem));
-			mgr.ReadConfig ();
-
-			string input;
-			int output;
-			
-			input = mgr.GetValue ("format");
-			if (input != "") {
-				Int32.TryParse (input, out output);
-				format = (prefFormat)output;
-			} else {
-				format = prefFormat.Bmp;
-			}
-			
-			input = mgr.GetValue ("width");
-			if (input != "") {
-				Int32.TryParse (input, out output);
-				width = output;
-			} else {
-				width = 1024;
-			}
-			
-			input = mgr.GetValue ("height");
-			if (input != "") {
-				Int32.TryParse (input, out output);
-				height = output;
-			} else {
-				height = 1024;
-			}
-
-			bool outputBool;
-			input = mgr.GetValue ("proportion");
-			if (input != "") {
-				bool.TryParse (input, out outputBool);
-				keepProportion = outputBool;
-			} else {
-				keepProportion = true;
-			}
-		}
 
 		public enum prefFormat
 		{
@@ -69,21 +21,90 @@ namespace TextureMerger
 			Jpg
 		}
 
-		public void savePref()
+		public Prefs ()
 		{
-			this.Log ().Info ("Trying to save the preferences");
-			int output;
-
-			Int32.TryParse (format.ToString (), out output);
-			mgr.SetValue ("format", output.ToString());
-			mgr.SetValue ("width", width.ToString());
-			mgr.SetValue ("height", height.ToString());
-			mgr.SetValue ("proportion", keepProportion.ToString());
-
-			mgr.WriteConfig ();
+			this.Log ().Debug ("Constructor for a preference set using default values.");
+			prefPrefix = "unnamed";
+			format = prefFormat.Bmp;
+			width = 1024;
+			height = 1024;
+			keepProportion = true;
 		}
 
-		public ImageFormat getImageFormat()
+		public void LoadPrefsFromManager(CfgManager mgr)
+		{
+			this.Log ().Debug ("Loading a preference set using the manager");
+
+			string input;
+			int output;
+
+			input = mgr.GetValue (prefPrefix + "_format");
+			if (input != "") {
+				Int32.TryParse (input, out output);
+				format = (prefFormat)output;
+			} else {
+				format = prefFormat.Bmp;
+			}
+			
+			input = mgr.GetValue (prefPrefix + "_width");
+			if (input != "") {
+				Int32.TryParse (input, out output);
+				width = output;
+			} else {
+				width = 1024;
+			}
+			
+			input = mgr.GetValue (prefPrefix + "_height");
+			if (input != "") {
+				Int32.TryParse (input, out output);
+				height = output;
+			} else {
+				height = 1024;
+			}
+
+			bool outputBool;
+			input = mgr.GetValue (prefPrefix + "_proportion");
+			if (input != "") {
+				bool.TryParse (input, out outputBool);
+				keepProportion = outputBool;
+			} else {
+				keepProportion = true;
+			}
+		}
+
+		public void SavePrefToManager(CfgManager mgr)
+		{
+			this.Log ().Info ("Trying to set the values of the preferences in the configuration manager");
+
+			mgr.SetValue (prefPrefix + "_format", ((int)format).ToString());
+			mgr.SetValue (prefPrefix + "_width", width.ToString());
+			mgr.SetValue (prefPrefix + "_height", height.ToString());
+			mgr.SetValue (prefPrefix + "_proportion", keepProportion.ToString());
+		}
+
+		public bool ValidatePrefs(out string messages)
+		{
+			StringBuilder sb = new StringBuilder ();
+			bool retVal = true;
+			if (width <= 0) {
+				retVal = false;
+				sb.Append ("Width cannot be negative or zero." + Environment.NewLine);
+			}
+			if (height <= 0) {
+				retVal = false;
+				sb.Append ("Height cannot be negative or zero." + Environment.NewLine);
+			}
+			if ((format != Prefs.prefFormat.Bmp) && 
+			    (format != Prefs.prefFormat.Jpg) &&
+			    (format != Prefs.prefFormat.Png)) {
+				retVal = false;
+				sb.Append ("Pixel format not recognized." + Environment.NewLine);
+			}
+			messages = sb.ToString ();
+			return retVal;
+		}
+
+		public System.Drawing.Imaging.ImageFormat GetImageFormat()
 		{
 			this.Log ().Debug ("Feching the Image Format Preference");
 			switch (format)

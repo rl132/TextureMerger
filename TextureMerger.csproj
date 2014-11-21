@@ -76,6 +76,8 @@
     <Compile Include="gtk-gui\TextureMerger.ImageSelectorRow.cs" />
     <Compile Include="ButtonImage.cs" />
     <Compile Include="gtk-gui\TextureMerger.ButtonImage.cs" />
+    <Compile Include="Configurations.cs" />
+    <Compile Include="Parameters.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

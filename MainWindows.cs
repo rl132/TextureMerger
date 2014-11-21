@@ -15,6 +15,8 @@ namespace TextureMerger
 	public partial class MainWindows : Gtk.Window
 	{
 		private Prefs currentPrefs = new Prefs ();
+		private Parameters currentParams = new Parameters();
+		private Configurations mgr = new Configurations();
 		private string currentPath;
 
 		public MainWindows () : 
@@ -45,6 +47,11 @@ namespace TextureMerger
 			currentPath = AppDomain.CurrentDomain.BaseDirectory;
 			lblPath.Text = currentPath;
 
+			// load the defaults prefs & parameters
+			currentPrefs.prefPrefix = "Default";
+			currentPrefs.LoadPrefsFromManager (mgr.GetManager ());
+			currentParams.LoadParametersFromManager (mgr.GetManager ());
+
 			// update the UI for the preferences
 			updateFromPref ();
 
@@ -55,17 +62,23 @@ namespace TextureMerger
 		{
 			this.Log ().Debug ("Trying to display the preference Dialog");
 
-			PreferenceDialog preferenceDg = new PreferenceDialog (currentPrefs);
+			PreferenceDialog preferenceDg = new PreferenceDialog (currentPrefs, currentParams);
 			if (preferenceDg.Run() == (int)ResponseType.Ok)
 			{
 				// update the preferences
-				currentPrefs = preferenceDg.getPref ();
+				currentPrefs = preferenceDg.GetPref ();
+				currentParams = preferenceDg.GetParam ();
 
-				// save the new prefs
-				currentPrefs.savePref ();
+				// write the new prefs and params to the configuration manager
+				currentPrefs.SavePrefToManager(mgr.GetManager());
+				currentParams.SaveParametersToManager (mgr.GetManager ());
+
+				// save the configs
+				mgr.Save ();
 
 				// update the UI
 				updateFromPref ();
+
 			}
 
 			return false;

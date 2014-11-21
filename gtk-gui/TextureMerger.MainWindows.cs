@@ -177,8 +177,6 @@ namespace TextureMerger
 			this.PreferencesAction.Activated += new global::System.EventHandler (this.OnPreferencesActionActivated);
 			this.ClearAction.Activated += new global::System.EventHandler (this.OnClearActionActivated);
 			this.QuitAction.Activated += new global::System.EventHandler (this.OnQuitActionActivated);
-			this.BtnBrowse.Clicked += new global::System.EventHandler (this.OnBtnBrowseClicked);
-			this.btnGo.Clicked += new global::System.EventHandler (this.OnBtnGoClicked);
 		}
 	}
 }

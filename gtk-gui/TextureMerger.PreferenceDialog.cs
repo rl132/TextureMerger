@@ -5,7 +5,7 @@ namespace TextureMerger
 	public partial class PreferenceDialog
 	{
 		private global::Gtk.VBox vbox2;
-		private global::Gtk.Label LabelPref;
+		private global::Gtk.Label LabelDefaults;
 		private global::Gtk.HSeparator hseparator1;
 		private global::Gtk.HBox hbox1;
 		private global::Gtk.Label lblFormat;
@@ -16,6 +16,11 @@ namespace TextureMerger
 		private global::Gtk.Entry txtWidth;
 		private global::Gtk.Label label1;
 		private global::Gtk.Entry txtHeight;
+		private global::Gtk.HBox hbox5;
+		private global::Gtk.Label lblPreviewSize;
+		private global::Gtk.ComboBox comboPreviewSize;
+		private global::Gtk.Label LabelPref;
+		private global::Gtk.HSeparator hseparator2;
 		private global::Gtk.HBox hbox4;
 		private global::Gtk.Label lblProportion;
 		private global::Gtk.CheckButton chkProportion;
@@ -38,11 +43,11 @@ namespace TextureMerger
 			this.vbox2.Name = "vbox2";
 			this.vbox2.Spacing = 6;
 			// Container child vbox2.Gtk.Box+BoxChild
-			this.LabelPref = new global::Gtk.Label ();
-			this.LabelPref.Name = "LabelPref";
-			this.LabelPref.LabelProp = global::Mono.Unix.Catalog.GetString ("Preferences");
-			this.vbox2.Add (this.LabelPref);
-			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.LabelPref]));
+			this.LabelDefaults = new global::Gtk.Label ();
+			this.LabelDefaults.Name = "LabelDefaults";
+			this.LabelDefaults.LabelProp = global::Mono.Unix.Catalog.GetString ("Defaults");
+			this.vbox2.Add (this.LabelDefaults);
+			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.LabelDefaults]));
 			w2.Position = 0;
 			w2.Expand = false;
 			w2.Fill = false;
@@ -143,12 +148,59 @@ namespace TextureMerger
 			w12.Position = 3;
 			w12.Expand = false;
 			w12.Fill = false;
-			w1.Add (this.vbox2);
-			global::Gtk.Box.BoxChild w13 = ((global::Gtk.Box.BoxChild)(w1 [this.vbox2]));
+			// Container child vbox2.Gtk.Box+BoxChild
+			this.hbox5 = new global::Gtk.HBox ();
+			this.hbox5.Name = "hbox5";
+			this.hbox5.Homogeneous = true;
+			this.hbox5.Spacing = 6;
+			// Container child hbox5.Gtk.Box+BoxChild
+			this.lblPreviewSize = new global::Gtk.Label ();
+			this.lblPreviewSize.Name = "lblPreviewSize";
+			this.lblPreviewSize.Xalign = 0F;
+			this.lblPreviewSize.LabelProp = global::Mono.Unix.Catalog.GetString ("Preview Size:");
+			this.hbox5.Add (this.lblPreviewSize);
+			global::Gtk.Box.BoxChild w13 = ((global::Gtk.Box.BoxChild)(this.hbox5 [this.lblPreviewSize]));
 			w13.Position = 0;
 			w13.Expand = false;
-			w13.Fill = false;
-			// Container child dialog1_VBox.Gtk.Box+BoxChild
+			w13.Padding = ((uint)(15));
+			// Container child hbox5.Gtk.Box+BoxChild
+			this.comboPreviewSize = global::Gtk.ComboBox.NewText ();
+			this.comboPreviewSize.AppendText (global::Mono.Unix.Catalog.GetString ("16"));
+			this.comboPreviewSize.AppendText (global::Mono.Unix.Catalog.GetString ("32"));
+			this.comboPreviewSize.AppendText (global::Mono.Unix.Catalog.GetString ("64"));
+			this.comboPreviewSize.AppendText (global::Mono.Unix.Catalog.GetString ("128"));
+			this.comboPreviewSize.Name = "comboPreviewSize";
+			this.comboPreviewSize.Active = 2;
+			this.hbox5.Add (this.comboPreviewSize);
+			global::Gtk.Box.BoxChild w14 = ((global::Gtk.Box.BoxChild)(this.hbox5 [this.comboPreviewSize]));
+			w14.Position = 1;
+			w14.Expand = false;
+			this.vbox2.Add (this.hbox5);
+			global::Gtk.Box.BoxChild w15 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.hbox5]));
+			w15.PackType = ((global::Gtk.PackType)(1));
+			w15.Position = 4;
+			w15.Expand = false;
+			w15.Fill = false;
+			// Container child vbox2.Gtk.Box+BoxChild
+			this.LabelPref = new global::Gtk.Label ();
+			this.LabelPref.Name = "LabelPref";
+			this.LabelPref.LabelProp = global::Mono.Unix.Catalog.GetString ("Preferences");
+			this.vbox2.Add (this.LabelPref);
+			global::Gtk.Box.BoxChild w16 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.LabelPref]));
+			w16.PackType = ((global::Gtk.PackType)(1));
+			w16.Position = 5;
+			w16.Expand = false;
+			w16.Fill = false;
+			// Container child vbox2.Gtk.Box+BoxChild
+			this.hseparator2 = new global::Gtk.HSeparator ();
+			this.hseparator2.Name = "hseparator2";
+			this.vbox2.Add (this.hseparator2);
+			global::Gtk.Box.BoxChild w17 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.hseparator2]));
+			w17.PackType = ((global::Gtk.PackType)(1));
+			w17.Position = 6;
+			w17.Expand = false;
+			w17.Fill = false;
+			// Container child vbox2.Gtk.Box+BoxChild
 			this.hbox4 = new global::Gtk.HBox ();
 			this.hbox4.Name = "hbox4";
 			this.hbox4.Homogeneous = true;
@@ -160,10 +212,10 @@ namespace TextureMerger
 			this.lblProportion.Xalign = 0F;
 			this.lblProportion.LabelProp = global::Mono.Unix.Catalog.GetString ("Keep Proportions:");
 			this.hbox4.Add (this.lblProportion);
-			global::Gtk.Box.BoxChild w14 = ((global::Gtk.Box.BoxChild)(this.hbox4 [this.lblProportion]));
-			w14.Position = 0;
-			w14.Expand = false;
-			w14.Padding = ((uint)(15));
+			global::Gtk.Box.BoxChild w18 = ((global::Gtk.Box.BoxChild)(this.hbox4 [this.lblProportion]));
+			w18.Position = 0;
+			w18.Expand = false;
+			w18.Padding = ((uint)(15));
 			// Container child hbox4.Gtk.Box+BoxChild
 			this.chkProportion = new global::Gtk.CheckButton ();
 			this.chkProportion.CanFocus = true;
@@ -172,19 +224,25 @@ namespace TextureMerger
 			this.chkProportion.DrawIndicator = true;
 			this.chkProportion.UseUnderline = true;
 			this.hbox4.Add (this.chkProportion);
-			global::Gtk.Box.BoxChild w15 = ((global::Gtk.Box.BoxChild)(this.hbox4 [this.chkProportion]));
-			w15.Position = 1;
-			w1.Add (this.hbox4);
-			global::Gtk.Box.BoxChild w16 = ((global::Gtk.Box.BoxChild)(w1 [this.hbox4]));
-			w16.Position = 1;
-			w16.Expand = false;
-			w16.Fill = false;
+			global::Gtk.Box.BoxChild w19 = ((global::Gtk.Box.BoxChild)(this.hbox4 [this.chkProportion]));
+			w19.Position = 1;
+			this.vbox2.Add (this.hbox4);
+			global::Gtk.Box.BoxChild w20 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.hbox4]));
+			w20.PackType = ((global::Gtk.PackType)(1));
+			w20.Position = 7;
+			w20.Expand = false;
+			w20.Fill = false;
+			w1.Add (this.vbox2);
+			global::Gtk.Box.BoxChild w21 = ((global::Gtk.Box.BoxChild)(w1 [this.vbox2]));
+			w21.Position = 0;
+			w21.Expand = false;
+			w21.Fill = false;
 			// Internal child TextureMerger.PreferenceDialog.ActionArea
-			global::Gtk.HButtonBox w17 = this.ActionArea;
-			w17.Name = "dialog1_ActionArea";
-			w17.Spacing = 10;
-			w17.BorderWidth = ((uint)(5));
-			w17.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
+			global::Gtk.HButtonBox w22 = this.ActionArea;
+			w22.Name = "dialog1_ActionArea";
+			w22.Spacing = 10;
+			w22.BorderWidth = ((uint)(5));
+			w22.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
 			// Container child dialog1_ActionArea.Gtk.ButtonBox+ButtonBoxChild
 			this.buttonCancel = new global::Gtk.Button ();
 			this.buttonCancel.CanDefault = true;
@@ -194,9 +252,9 @@ namespace TextureMerger
 			this.buttonCancel.UseUnderline = true;
 			this.buttonCancel.Label = "gtk-cancel";
 			this.AddActionWidget (this.buttonCancel, -6);
-			global::Gtk.ButtonBox.ButtonBoxChild w18 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w17 [this.buttonCancel]));
-			w18.Expand = false;
-			w18.Fill = false;
+			global::Gtk.ButtonBox.ButtonBoxChild w23 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w22 [this.buttonCancel]));
+			w23.Expand = false;
+			w23.Fill = false;
 			// Container child dialog1_ActionArea.Gtk.ButtonBox+ButtonBoxChild
 			this.buttonOk = new global::Gtk.Button ();
 			this.buttonOk.CanDefault = true;
@@ -206,15 +264,15 @@ namespace TextureMerger
 			this.buttonOk.UseUnderline = true;
 			this.buttonOk.Label = "gtk-ok";
 			this.AddActionWidget (this.buttonOk, -5);
-			global::Gtk.ButtonBox.ButtonBoxChild w19 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w17 [this.buttonOk]));
-			w19.Position = 1;
-			w19.Expand = false;
-			w19.Fill = false;
+			global::Gtk.ButtonBox.ButtonBoxChild w24 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w22 [this.buttonOk]));
+			w24.Position = 1;
+			w24.Expand = false;
+			w24.Fill = false;
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}
 			this.DefaultWidth = 750;
-			this.DefaultHeight = 223;
+			this.DefaultHeight = 297;
 			this.Show ();
 			this.DeleteEvent += new global::Gtk.DeleteEventHandler (this.OnDeleteEvent);
 			this.buttonCancel.Clicked += new global::System.EventHandler (this.OnButtonCancelClicked);
