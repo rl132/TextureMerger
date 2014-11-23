@@ -126,5 +126,22 @@ namespace TextureMerger
 			// refresh all
 			rowControl.ShowAll ();
 		}
+
+		public void UpdateSize(int newSize)
+		{
+			this.Log ().Debug ("updating the size of the row's items");
+
+			imageSize = newSize;
+
+			int i = 0;
+			ButtonImage item;
+			foreach (Gtk.Widget ch in rowControl.Children) {
+				if (i < rowControl.Children.Length-2) {
+					item = (ButtonImage)ch;
+					item.UpdateSize (newSize);
+				}
+				i++;
+			}
+		}
 	}
 }

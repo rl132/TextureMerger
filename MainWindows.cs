@@ -78,7 +78,6 @@ namespace TextureMerger
 
 				// update the UI
 				updateFromPref ();
-
 			}
 
 			return false;
@@ -86,7 +85,8 @@ namespace TextureMerger
 
 		private void updateSelectors()
 		{
-			// TODO: update the selector (and it items) for size changes.
+			// propagate the new size to the selector's children
+			dynamicSelector.UpdateSize (currentParams.previewSize);
 		}
 
 		private void updateFromPref()

@@ -114,5 +114,11 @@ namespace TextureMerger
 			fromFile = null;
 			UpdateImage ();
 		}
+
+		public void UpdateSize(int newSize)
+		{
+			imageSize = newSize;
+			UpdateImage ();
+		}
 	}
 }

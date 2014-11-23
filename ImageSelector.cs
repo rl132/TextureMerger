@@ -70,7 +70,7 @@ namespace TextureMerger
 				}
 				numberRow++;
 				arrayRow = newArray;
-				ImageSelectorRow newRow = new ImageSelectorRow ();
+				ImageSelectorRow newRow = new ImageSelectorRow (imageSize);
 				arrayRow [numberRow - 1] = newRow;
 
 				RefreshRow ();
@@ -122,6 +122,23 @@ namespace TextureMerger
 
 			// refresh all
 			selector.ShowAll ();
+		}
+
+		public void UpdateSize(int newSize)
+		{
+			this.Log ().Debug ("updating the size of the selector's items");
+
+			imageSize = newSize;
+
+			int i = 0;
+			ImageSelectorRow item;
+			foreach (Gtk.Widget ch in selector.Children) {
+				if (i < selector.Children.Length-1) {
+					item = (ImageSelectorRow)ch;
+					item.UpdateSize (newSize);
+				}
+				i++;
+			}
 		}
 	}
 }
