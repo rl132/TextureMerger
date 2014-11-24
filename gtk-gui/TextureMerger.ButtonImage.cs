@@ -5,7 +5,9 @@ namespace TextureMerger
 	public partial class ButtonImage
 	{
 		private global::Gtk.HBox buttonControl;
+		
 		private global::Gtk.Button btn;
+		
 		private global::Gtk.Image img;
 
 		protected virtual void Build ()
@@ -27,7 +29,6 @@ namespace TextureMerger
 			this.img = new global::Gtk.Image ();
 			this.img.Name = "img";
 			this.btn.Add (this.img);
-			this.btn.Label = null;
 			this.buttonControl.Add (this.btn);
 			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.buttonControl [this.btn]));
 			w2.Position = 0;

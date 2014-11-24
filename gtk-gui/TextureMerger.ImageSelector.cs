@@ -5,10 +5,15 @@ namespace TextureMerger
 	public partial class ImageSelector
 	{
 		private global::Gtk.VBox selector;
+		
 		private global::Gtk.HBox hbox2;
+		
 		private global::Gtk.Label lblEmpty1;
+		
 		private global::Gtk.Button selectorMinus;
+		
 		private global::Gtk.Button selectorPlus;
+		
 		private global::Gtk.Label lblEmpty2;
 
 		protected virtual void Build ()

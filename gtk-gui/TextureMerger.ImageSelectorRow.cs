@@ -5,13 +5,21 @@ namespace TextureMerger
 	public partial class ImageSelectorRow
 	{
 		private global::Gtk.HBox rowControl;
+		
 		private global::Gtk.VBox vbox2;
+		
 		private global::Gtk.Label lblEmpty1;
+		
 		private global::Gtk.Button rowMinus;
+		
 		private global::Gtk.Label lblEmpty3;
+		
 		private global::Gtk.VBox vbox3;
+		
 		private global::Gtk.Label lblEmpty2;
+		
 		private global::Gtk.Button rowPlus;
+		
 		private global::Gtk.Label lblEmpty4;
 
 		protected virtual void Build ()
