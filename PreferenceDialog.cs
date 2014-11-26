@@ -3,8 +3,10 @@ using RLToolkit;
 using Gtk;
 using System.Text;
 
+using RLToolkit.Extensions;
+
 namespace TextureMerger
-{
+{ 
 	public partial class PreferenceDialog : Gtk.Dialog
 	{
 		public Prefs currentPrefs = new Prefs();
@@ -15,14 +17,9 @@ namespace TextureMerger
 			this.Log ().Debug ("Creating a new Preference Dialog");
 			this.Build ();
 
-			// fill in the preferences
-			currentPrefs.format = initialPrefs.format;
-			currentPrefs.width = initialPrefs.width;
-			currentPrefs.height = initialPrefs.height;
-			currentPrefs.keepProportion = initialPrefs.keepProportion;
-
-			// fill in the parameters
-			currentParam.previewSize = initialParams.previewSize;
+			// fill in the preferences & param
+			currentPrefs = initialPrefs;
+			currentParam = initialParams;
 		
 			// fill the preferences UI
 			txtWidth.Text = currentPrefs.width.ToString ();
@@ -31,8 +28,7 @@ namespace TextureMerger
 			chkProportion.Active = currentPrefs.keepProportion;
 
 			// fill the parameter UI
-			// TODO: bring that back as an extension in the toolkit
-			int index = FindIndex (comboPreviewSize, currentParam.previewSize.ToString());
+			int index = comboPreviewSize.FindIndex(currentParam.previewSize.ToString());
 			if (index != -1) {
 				comboPreviewSize.Active = index;
 			}
@@ -126,25 +122,6 @@ namespace TextureMerger
 		{
 			this.Log ().Debug ("Dialog Closed");
 			this.Destroy ();
-		}
-
-		// TODO: bring that back in the toolkit
-		private int FindIndex(Gtk.ComboBox inputCombo, string textToFind)
-		{
-			ListStore store;
-			store = (ListStore)inputCombo.Model;
-
-			int i = 0;
-			foreach (object[] row in store) {
-				if (row [0].ToString().ToLower() == textToFind.ToLower()) {
-					// return the index of the found item
-					return i;
-				}
-				i++;
-			}
-
-			// not found
-			return -1;
 		}
 	}
 }
