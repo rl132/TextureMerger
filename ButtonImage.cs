@@ -68,6 +68,8 @@ namespace TextureMerger
 			try
 			{
 				fromFile = new Bitmap(System.Drawing.Image.FromFile(filename));
+				this.WidthRequest = imageSize;
+				this.HeightRequest = imageSize;
 			}
 			catch (Exception e) 
 			{

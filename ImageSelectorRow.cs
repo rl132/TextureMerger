@@ -102,29 +102,22 @@ namespace TextureMerger
 		private void RefreshButtons()
 		{
 			this.Log ().Debug ("Refreshing buttons");
-			// backup the last 2 CONTROLS
-			Gtk.Widget lastControl = rowControl.Children[rowControl.Children.Length-1];
-			Gtk.Widget nextToLastControl = rowControl.Children[rowControl.Children.Length-2];
 
 			// wipe everything
-			foreach (Gtk.Widget ch in rowControl.Children) {
-				rowControl.Remove (ch);
+			foreach (Gtk.Widget ch in buttonBox.Children) {
+				buttonBox.Remove (ch);
 			}
 
 			// add the buttons
 			int i = 0;
 			foreach (ButtonImage b in arrayButton) {
-				rowControl.Spacing = i;
-				rowControl.Add (b);
+				buttonBox.Spacing = i;
+				buttonBox.Add (b);
 				i++;
 			}
 
-			// add the buttons
-			rowControl.Add (nextToLastControl);
-			rowControl.Add (lastControl);
-
 			// refresh all
-			rowControl.ShowAll ();
+			buttonBox.ShowAll ();
 		}
 
 		public void UpdateSize(int newSize)
@@ -135,9 +128,11 @@ namespace TextureMerger
 
 			int i = 0;
 			ButtonImage item;
-			foreach (Gtk.Widget ch in rowControl.Children) {
-				if (i < rowControl.Children.Length-2) {
+			foreach (Gtk.Widget ch in buttonBox.Children) {
+				if (i < buttonBox.Children.Length) {
 					item = (ButtonImage)ch;
+					item.HeightRequest = newSize;
+					item.WidthRequest = newSize;
 					item.UpdateSize (newSize);
 				}
 				i++;

@@ -805,15 +805,27 @@ Jpg</property>
         <property name="MemberName" />
         <property name="Spacing">6</property>
         <child>
-          <placeholder />
+          <widget class="Gtk.HBox" id="buttonBox">
+            <property name="MemberName" />
+            <property name="Spacing">6</property>
+            <child>
+              <placeholder />
+            </child>
+          </widget>
+          <packing>
+            <property name="Position">0</property>
+            <property name="AutoSize">True</property>
+          </packing>
         </child>
         <child>
           <widget class="Gtk.VBox" id="vbox2">
             <property name="MemberName" />
+            <property name="WidthRequest">23</property>
             <property name="Spacing">6</property>
             <child>
               <widget class="Gtk.Label" id="lblEmpty1">
                 <property name="MemberName" />
+                <property name="WidthRequest">22</property>
               </widget>
               <packing>
                 <property name="Position">0</property>
@@ -842,6 +854,7 @@ Jpg</property>
             <child>
               <widget class="Gtk.Label" id="lblEmpty3">
                 <property name="MemberName" />
+                <property name="WidthRequest">22</property>
               </widget>
               <packing>
                 <property name="Position">2</property>
@@ -861,10 +874,12 @@ Jpg</property>
         <child>
           <widget class="Gtk.VBox" id="vbox3">
             <property name="MemberName" />
+            <property name="WidthRequest">23</property>
             <property name="Spacing">6</property>
             <child>
               <widget class="Gtk.Label" id="lblEmpty2">
                 <property name="MemberName" />
+                <property name="WidthRequest">22</property>
               </widget>
               <packing>
                 <property name="Position">0</property>
@@ -893,6 +908,7 @@ Jpg</property>
             <child>
               <widget class="Gtk.Label" id="lblEmpty4">
                 <property name="MemberName" />
+                <property name="WidthRequest">22</property>
               </widget>
               <packing>
                 <property name="Position">2</property>
