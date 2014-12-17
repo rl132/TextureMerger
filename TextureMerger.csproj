@@ -49,6 +49,9 @@
     <Reference Include="RLToolkit.Extensions">
       <HintPath>lib\RLToolkit.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="RLToolkit.Widgets">
+      <HintPath>lib\RLToolkit.Widgets.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">
@@ -63,12 +66,6 @@
     <Compile Include="PreferenceDialog.cs" />
     <Compile Include="gtk-gui\TextureMerger.PreferenceDialog.cs" />
     <Compile Include="Prefs.cs" />
-    <Compile Include="ImageSelector.cs" />
-    <Compile Include="gtk-gui\TextureMerger.ImageSelector.cs" />
-    <Compile Include="ImageSelectorRow.cs" />
-    <Compile Include="gtk-gui\TextureMerger.ImageSelectorRow.cs" />
-    <Compile Include="ButtonImage.cs" />
-    <Compile Include="gtk-gui\TextureMerger.ButtonImage.cs" />
     <Compile Include="Configurations.cs" />
     <Compile Include="Parameters.cs" />
   </ItemGroup>
@@ -76,5 +73,6 @@
   <ItemGroup>
     <None Include="Properties\app.config" />
     <None Include="README.md" />
+    <None Include="License.md" />
   </ItemGroup>
 </Project>

@@ -5,65 +5,35 @@ namespace TextureMerger
 	public partial class MainWindows
 	{
 		private global::Gtk.UIManager UIManager;
-		
 		private global::Gtk.Action FileAction;
-		
 		private global::Gtk.Action PreferencesAction;
-		
 		private global::Gtk.Action ClearNewAction;
-		
 		private global::Gtk.Action QuitAction;
-		
 		private global::Gtk.VBox vbox1;
-		
 		private global::Gtk.MenuBar menubar1;
-		
 		private global::Gtk.Label title;
-		
 		private global::Gtk.HSeparator hseparator3;
-		
-		private global::TextureMerger.ImageSelector dynamicSelector;
-		
+		private global::RLToolkit.Widgets.DynamicRow dynamicrow1;
 		private global::Gtk.HSeparator hseparator2;
-		
 		private global::Gtk.Label LabelParam;
-		
 		private global::Gtk.HBox hbox1;
-		
 		private global::Gtk.Label lblFormat;
-		
 		private global::Gtk.ComboBox comboFormat;
-		
 		private global::Gtk.HBox hbox3;
-		
 		private global::Gtk.Label lblSize;
-		
 		private global::Gtk.HBox hbox4;
-		
 		private global::Gtk.Entry txtWidth;
-		
 		private global::Gtk.Label label1;
-		
 		private global::Gtk.Entry txtHeight;
-		
 		private global::Gtk.HBox hbox5;
-		
 		private global::Gtk.Label lblProportion;
-		
 		private global::Gtk.CheckButton chkProportion;
-		
 		private global::Gtk.HBox hbox6;
-		
 		private global::Gtk.Label labelOutput;
-		
 		private global::Gtk.Label lblPath;
-		
 		private global::Gtk.Entry txtFilename;
-		
 		private global::Gtk.Label lblExtension;
-		
 		private global::Gtk.Button BtnBrowse;
-		
 		private global::Gtk.Button btnGo;
 
 		protected virtual void Build ()
@@ -88,7 +58,7 @@ namespace TextureMerger
 			this.AddAccelGroup (this.UIManager.AccelGroup);
 			this.Name = "TextureMerger.MainWindows";
 			this.Title = global::Mono.Unix.Catalog.GetString ("Texture Merger");
-			this.WindowPosition = ((global::Gtk.WindowPosition)(4));
+			this.WindowPosition = ((global::Gtk.WindowPosition)(1));
 			this.BorderWidth = ((uint)(3));
 			this.Resizable = false;
 			this.AllowGrow = false;
@@ -99,7 +69,7 @@ namespace TextureMerger
 			this.vbox1.Name = "vbox1";
 			this.vbox1.Spacing = 6;
 			// Container child vbox1.Gtk.Box+BoxChild
-			this.UIManager.AddUiFromString (@"<ui><menubar name='menubar1'><menu name='FileAction' action='FileAction'><menuitem name='ClearNewAction' action='ClearNewAction'/><menuitem name='PreferencesAction' action='PreferencesAction'/><menuitem name='QuitAction' action='QuitAction'/></menu></menubar></ui>");
+			this.UIManager.AddUiFromString ("<ui><menubar name='menubar1'><menu name='FileAction' action='FileAction'><menuitem name='ClearNewAction' action='ClearNewAction'/><menuitem name='PreferencesAction' action='PreferencesAction'/><menuitem name='QuitAction' action='QuitAction'/></menu></menubar></ui>");
 			this.menubar1 = ((global::Gtk.MenuBar)(this.UIManager.GetWidget ("/menubar1")));
 			this.menubar1.Name = "menubar1";
 			this.vbox1.Add (this.menubar1);
@@ -126,13 +96,12 @@ namespace TextureMerger
 			w4.Expand = false;
 			w4.Fill = false;
 			// Container child vbox1.Gtk.Box+BoxChild
-			this.dynamicSelector = new global::TextureMerger.ImageSelector ();
-			this.dynamicSelector.Events = ((global::Gdk.EventMask)(256));
-			this.dynamicSelector.Name = "dynamicSelector";
-			this.vbox1.Add (this.dynamicSelector);
-			global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.dynamicSelector]));
+			this.dynamicrow1 = new global::RLToolkit.Widgets.DynamicRow ();
+			this.dynamicrow1.Events = ((global::Gdk.EventMask)(256));
+			this.dynamicrow1.Name = "dynamicrow1";
+			this.vbox1.Add (this.dynamicrow1);
+			global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.dynamicrow1]));
 			w5.Position = 3;
-			w5.Fill = false;
 			// Container child vbox1.Gtk.Box+BoxChild
 			this.hseparator2 = new global::Gtk.HSeparator ();
 			this.hseparator2.Name = "hseparator2";

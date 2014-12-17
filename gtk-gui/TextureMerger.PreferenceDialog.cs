@@ -272,7 +272,7 @@ namespace TextureMerger
 				this.Child.ShowAll ();
 			}
 			this.DefaultWidth = 750;
-			this.DefaultHeight = 297;
+			this.DefaultHeight = 262;
 			this.Show ();
 			this.DeleteEvent += new global::Gtk.DeleteEventHandler (this.OnDeleteEvent);
 			this.buttonCancel.Clicked += new global::System.EventHandler (this.OnButtonCancelClicked);
